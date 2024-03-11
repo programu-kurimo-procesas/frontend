@@ -10,23 +10,37 @@ import BackButton from '../components/BackButton'
 import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
+import useLoginValidator from '../helpers/loginValidator'
 
-export default function LoginScreen({ navigation }) {
-  const [email, setEmail] = useState({ value: '', error: '' })
-  const [password, setPassword] = useState({ value: '', error: '' })
+export default function LoginScreen({ navigation, updateUser }) {
 
+  const [email, setEmail] = useState({ value: 'string@string.com', error: '' })
+  const [password, setPassword] = useState({ value: 'string', error: '' })
+  
+  const userData = useLoginValidator({ email: email.value, password: password.value });
+  
+  
+  
   const onLoginPressed = () => {
-    const emailError = emailValidator(email.value)
-    const passwordError = passwordValidator(password.value)
+    const emailError = emailValidator(email.value);
+    const passwordError = passwordValidator(password.value);
     if (emailError || passwordError) {
       setEmail({ ...email, error: emailError })
       setPassword({ ...password, error: passwordError })
       return
     }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Dashboard' }],
-    })
+    console.log(userData.length);
+    console.log(userData);
+    if (userData.email === email.value && userData.password === password.value) {
+      updateUser(userData);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'ProductsScreen' }],
+      })
+    } else {
+      setEmail({ ...email, error: 'Incorrect email or password' })
+      setPassword({ ...password, error: 'Incorrect email or password' })
+    }
   }
 
   return (
@@ -36,6 +50,7 @@ export default function LoginScreen({ navigation }) {
       <Header>Welcome back.</Header>
       <TextInput
         label="Email"
+      
         returnKeyType="next"
         value={email.value}
         onChangeText={(text) => setEmail({ value: text, error: '' })}

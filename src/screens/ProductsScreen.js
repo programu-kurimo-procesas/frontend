@@ -5,7 +5,9 @@ import Button from '../components/Button';
 import Background from '../components/Background';
 import { LinearGradient } from 'expo-linear-gradient';
 import { theme } from '../core/theme';
-const ProductsScreen = () => {
+import { addItemToList } from '../helpers/addToList';
+const ProductsScreen = ({userData}) => {
+    console.log(userData);
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const [imageUris, setImageUris] = useState({});
@@ -13,12 +15,15 @@ const ProductsScreen = () => {
     const [selectedItemImage, setSelectedItemImage] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
 
-    useEffect(() => {
+    const fetchProducts = () => {
         fetch('http://192.168.0.145/Product/GetAll')
             .then((response) => response.json())
             .then((json) => setData(json))
             .catch((error) => console.error(error))
             .finally(() => setLoading(false));
+    }
+    useEffect(() => {
+        fetchProducts();
     }, []);
 
     useEffect(() => {
@@ -82,6 +87,17 @@ const ProductsScreen = () => {
         setModalVisible(false);
     };
 
+    const addItem = async() => {
+        let response = await addItemToList(selectedItem.id, userData.id);
+        if (response === "Product already in list") {
+            alert("Product already in list");
+            closeModal();
+        } else {
+            alert("Product added to list");
+            closeModal();
+        }
+    };
+
     return (
         <Background>
             <Modal
@@ -103,7 +119,7 @@ const ProductsScreen = () => {
                                 <Text style={styles.itemPrice}>{selectedItem?.price} €</Text>
                             </View>
                         </View>
-                        <Button mode={'contained'} >
+                        <Button mode={'contained'} onPress={addItem} >
                             Add to List
                         </Button>
                     </View>

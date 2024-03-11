@@ -8,9 +8,7 @@ import Paragraph from '../components/Paragraph'
 export default function StartScreen({ navigation }) {
   return (
     <Background>
-      <Header>
-        Scan And Go
-      </Header>
+      <Logo/>
       <Button
         mode="contained"
         onPress={() => navigation.navigate('LoginScreen')}
