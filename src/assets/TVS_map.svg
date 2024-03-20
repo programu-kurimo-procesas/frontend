@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 550 840" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <style bx:fonts="Asap Condensed">@import url(https://fonts.googleapis.com/css2?family=Asap+Condensed%3Aital%2Cwght%400%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B0%2C900%3B1%2C200%3B1%2C300%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800%3B1%2C900&amp;display=swap);</style>
+  </defs>
+  <rect x="24.023" y="44" width="80" height="8" style="fill: rgb(140, 141, 143); paint-order: fill; fill-rule: nonzero;"/>
+  <rect x="42.486" y="145.153" width="420" height="8" style="fill: rgb(140, 141, 143); paint-order: fill; fill-rule: nonzero;" transform="matrix(0, 1, -1, 0, 176.89653, 1.514)"/>
+  <rect x="43.992" y="139.277" width="40" height="8" style="fill: rgb(140, 141, 143); paint-order: fill; fill-rule: nonzero;" transform="matrix(0, 1, -1, 0, 243.939423, -32.273148)"/>
+  <rect x="21.511" y="85" width="40" height="8" style="fill: rgb(140, 141, 143); paint-order: fill; fill-rule: nonzero;" transform="matrix(0, 1, -1, 0, 235.929199, -9.740871)"/>
+  <rect x="142.908" y="44.573" width="382" height="8" style="fill: rgb(140, 141, 143); paint-order: fill; fill-rule: nonzero;"/>
+  <rect x="42.486" y="145.153" width="420" height="8" style="fill: rgb(140, 141, 143); paint-order: fill; fill-rule: nonzero;" transform="matrix(0, 1, -1, 0, 670.920471, 2.759655)"/>
+  <rect x="143.674" y="54.472" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);"/>
+  <rect x="179.535" y="54.442" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);"/>
+  <rect x="215.535" y="54.442" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);"/>
+  <rect x="203.535" y="95.442" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(0, 1, -1, 0, 383.697815, -149.418732)"/>
+  <rect x="203.535" y="95.442" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(0, 1, -1, 0, 397.697815, -149.418732)"/>
+  <rect x="203.535" y="95.442" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(0, 1, -1, 0, 383.697815, -113.418739)"/>
+  <rect x="203.535" y="95.442" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(0, 1, -1, 0, 397.697815, -113.418739)"/>
+  <rect x="203.535" y="95.442" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(0, 1, -1, 0, 508.697815, -149.418732)"/>
+  <rect x="203.535" y="95.442" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(0, 1, -1, 0, 522.697815, -149.418732)"/>
+  <rect x="203.535" y="95.442" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(0, 1, -1, 0, 508.697815, -113.418739)"/>
+  <rect x="203.535" y="95.442" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(0, 1, -1, 0, 522.697815, -113.418739)"/>
+  <rect x="287.372" y="152.155" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(0, 1, -1, 0, 668.155029, -233.372009)"/>
+  <rect x="323.233" y="152.125" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(0, 1, -1, 0, 668.155029, -233.372009)"/>
+  <rect x="359.233" y="152.125" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(0, 1, -1, 0, 668.155029, -233.372009)"/>
+  <rect x="447.535" y="54.442" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);"/>
+  <rect x="322.325" y="73.605" width="60.465" height="19.186" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);"/>
+  <rect x="325.791" y="64.477" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);"/>
+  <rect x="355.791" y="64.477" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);"/>
+  <rect x="325.791" y="96.477" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);"/>
+  <rect x="355.791" y="96.477" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);"/>
+  <rect x="359.233" y="152.125" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(0, 1, -1, 0, 668.155029, -197.372009)"/>
+  <rect x="-516.256" y="-226.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-516.256" y="-240.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-480.256" y="-226.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-480.256" y="-240.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-444.256" y="-226.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-444.256" y="-240.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-516.256" y="-270.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-516.256" y="-284.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-480.256" y="-270.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-480.256" y="-284.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-444.256" y="-270.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-444.256" y="-284.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-516.256" y="-313.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-516.256" y="-327.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-480.256" y="-313.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-480.256" y="-327.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-444.256" y="-313.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-444.256" y="-327.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-516.256" y="-356.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-516.256" y="-370.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-480.256" y="-356.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-480.256" y="-370.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-444.256" y="-356.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-444.256" y="-370.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-516.256" y="-398.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-516.256" y="-412.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-480.256" y="-398.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-480.256" y="-412.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-444.256" y="-398.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-444.256" y="-412.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-516.256" y="-441.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-516.256" y="-455.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-480.256" y="-441.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-480.256" y="-455.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-444.256" y="-441.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="-444.256" y="-455.116" width="34" height="12" style="paint-order: fill; fill-rule: nonzero; fill: rgb(163, 164, 166);" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <path d="M 222.046 165.801 L 245.27 182.674 L 236.399 209.975 L 207.693 209.975 L 198.822 182.674 Z" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0.866025, 0.5, -0.5, 0.866025, 123.691673, -51.853447)" bx:shape="n-gon 222.046 190.22 24.419 24.419 5 0 1@b54ee756"/>
+  <rect x="205.442" y="159.754" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0.994522, -0.104528, 0.104528, 0.994522, -15.811533, 58.619949)"/>
+  <rect x="205.442" y="159.754" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0.390731, 0.920505, -0.920505, 0.390731, 310.117798, -50.901764)"/>
+  <rect x="205.442" y="159.754" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0.743145, -0.66913, 0.66913, 0.743145, -32.153355, 268.474152)"/>
+  <rect x="205.442" y="159.754" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(-0.866025, -0.500001, 0.500001, -0.866025, 314.355225, 496.180756)"/>
+  <rect x="205.442" y="159.754" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(-0.207913, 0.978147, -0.978147, -0.207913, 398.652771, 39.670425)"/>
+  <path d="M 222.046 165.801 L 245.27 182.674 L 236.399 209.975 L 207.693 209.975 L 198.822 182.674 Z" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0.529919, 0.848048, -0.848048, 0.529919, 385.188049, -85.4049)" bx:shape="n-gon 222.046 190.22 24.419 24.419 5 0 1@b54ee756"/>
+  <rect x="205.442" y="159.754" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0.927184, 0.374607, -0.374607, 0.927184, 210.149399, -53.347099)"/>
+  <rect x="205.442" y="159.754" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(-0.087156, 0.996195, -0.996195, -0.087156, 549.345276, 2.965515)"/>
+  <rect x="205.442" y="159.754" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0.970296, -0.241921, 0.241921, 0.970296, 97.19986, 124.271126)"/>
+  <rect x="205.442" y="159.754" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(-0.529918, -0.848049, 0.848049, -0.529918, 296.246979, 488.000061)"/>
+  <rect x="205.442" y="159.754" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(-0.642789, 0.766043, -0.766043, -0.642789, 584.995911, 124.500664)"/>
+  <path d="M 222.046 165.801 L 245.27 182.674 L 236.399 209.975 L 207.693 209.975 L 198.822 182.674 Z" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0.788011, 0.615662, -0.615662, 0.788011, 241.904984, 74.25293)" bx:shape="n-gon 222.046 190.22 24.419 24.419 5 0 1@b54ee756"/>
+  <rect x="205.442" y="159.754" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0.999391, 0.0349, -0.0349, 0.999391, 88.38781, 164.249573)"/>
+  <rect x="205.442" y="159.754" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0.258819, 0.965926, -0.965926, 0.258819, 426.387695, 101.15432)"/>
+  <rect x="205.442" y="159.754" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0.829038, -0.559192, 0.559192, 0.829038, 42.998962, 369.78714)"/>
+  <rect x="205.442" y="159.754" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(-0.78801, -0.615662, 0.615662, -0.78801, 354.444702, 643.502441)"/>
+  <rect x="205.442" y="159.754" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(-0.342021, 0.939692, -0.939692, -0.342021, 501.455841, 203.166748)"/>
+  <rect x="123.177" y="139.277" width="112" height="8" style="fill: rgb(140, 141, 143); paint-order: fill; fill-rule: nonzero;" transform="matrix(0, 1, -1, 0, 229.695587, -72.947647)"/>
+  <rect x="26.989" y="213.579" width="63" height="8" style="fill: rgb(140, 141, 143); paint-order: fill; fill-rule: nonzero;"/>
+  <ellipse style="fill: rgb(140, 141, 143);" cx="27.907" cy="161.072" rx="9.884" ry="9.884"/>
+  <ellipse style="fill: rgb(140, 141, 143);" cx="27.907" cy="524.072" rx="9.884" ry="9.884"/>
+  <ellipse style="fill: rgb(140, 141, 143);" cx="268.907" cy="524.072" rx="9.884" ry="9.884"/>
+  <rect x="29.639" y="145.153" width="293" height="8" style="fill: rgb(140, 141, 143); paint-order: fill; fill-rule: nonzero;" transform="matrix(0, 1, -1, 0, 176.89653, 494.360962)"/>
+  <rect x="24.058" y="809.928" width="248" height="8" style="fill: rgb(140, 141, 143); paint-order: fill; fill-rule: nonzero;"/>
+  <rect x="34.768" y="564.49" width="26" height="26" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);"/>
+  <rect x="355.791" y="96.477" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0, 1, -1, 0, 167.104919, 209.709015)"/>
+  <text style="fill: rgb(137, 164, 179); font-family: &quot;Asap Condensed&quot;; font-size: 16.3px; white-space: pre;" transform="matrix(1.962064, 0, 0, 1.552877, -110.273682, -376.952515)" x="76.163" y="620.285">K</text>
+  <rect x="34.768" y="600.49" width="26" height="26" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);"/>
+  <rect x="355.791" y="96.477" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0, 1, -1, 0, 167.104919, 245.709015)"/>
+  <text style="fill: rgb(137, 164, 179); font-family: &quot;Asap Condensed&quot;; font-size: 16.3px; white-space: pre;" transform="matrix(1.962064, 0, 0, 1.552877, -110.273682, -340.952515)" x="76.163" y="620.285">K</text>
+  <rect x="34.768" y="635.49" width="26" height="26" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);"/>
+  <rect x="355.791" y="96.477" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0, 1, -1, 0, 167.104919, 280.709015)"/>
+  <text style="fill: rgb(137, 164, 179); font-family: &quot;Asap Condensed&quot;; font-size: 16.3px; white-space: pre;" transform="matrix(1.962064, 0, 0, 1.552877, -110.273682, -305.952515)" x="76.163" y="620.285">K</text>
+  <rect x="34.768" y="671.49" width="26" height="26" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);"/>
+  <rect x="355.791" y="96.477" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0, 1, -1, 0, 167.104919, 316.709015)"/>
+  <text style="fill: rgb(137, 164, 179); font-family: &quot;Asap Condensed&quot;; font-size: 16.3px; white-space: pre;" transform="matrix(1.962064, 0, 0, 1.552877, -110.273682, -269.952515)" x="76.163" y="620.285">K</text>
+  <rect x="34.768" y="564.49" width="26" height="26" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0, -1, 1, 0, -529.471924, 841.56427)"/>
+  <rect x="36.028" y="770.936" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);"/>
+  <text style="fill: rgb(137, 164, 179); font-family: &quot;Asap Condensed&quot;; font-size: 16.3px; white-space: pre;" transform="matrix(1.962064, 0, 0, 1.552877, -109.623596, -160.954315)" x="76.163" y="620.285">K</text>
+  <rect x="34.768" y="600.49" width="26" height="26" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0, -1, 1, 0, -529.471924, 841.56427)"/>
+  <rect x="72.028" y="770.936" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);"/>
+  <text style="fill: rgb(137, 164, 179); font-family: &quot;Asap Condensed&quot;; font-size: 16.3px; white-space: pre;" transform="matrix(1.962064, 0, 0, 1.552877, -73.623596, -160.954315)" x="76.163" y="620.285">K</text>
+  <rect x="34.768" y="635.49" width="26" height="26" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0, -1, 1, 0, -529.471924, 841.56427)"/>
+  <rect x="107.028" y="770.936" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);"/>
+  <text style="fill: rgb(137, 164, 179); font-family: &quot;Asap Condensed&quot;; font-size: 16.3px; white-space: pre;" transform="matrix(1.962064, 0, 0, 1.552876, -38.624123, -160.95433)" x="76.163" y="620.285">K</text>
+  <rect x="34.768" y="671.49" width="26" height="26" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0, -1, 1, 0, -529.471924, 841.56427)"/>
+  <rect x="143.028" y="770.936" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);"/>
+  <text style="fill: rgb(137, 164, 179); font-family: &quot;Asap Condensed&quot;; font-size: 16.3px; white-space: pre;" transform="matrix(1.962064, 0, 0, 1.552877, -2.623653, -160.954315)" x="76.163" y="620.285">K</text>
+  <rect x="34.768" y="635.49" width="26" height="26" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0, -1, 1, 0, -458.471924, 841.56427)"/>
+  <rect x="178.028" y="770.936" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);"/>
+  <text style="fill: rgb(137, 164, 179); font-family: &quot;Asap Condensed&quot;; font-size: 16.3px; white-space: pre;" transform="matrix(1.962064, 0, 0, 1.552877, 32.376408, -160.954315)" x="76.163" y="620.285">K</text>
+  <rect x="34.768" y="671.49" width="26" height="26" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0, -1, 1, 0, -458.471924, 841.56427)"/>
+  <rect x="214.028" y="770.936" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);"/>
+  <text style="fill: rgb(137, 164, 179); font-family: &quot;Asap Condensed&quot;; font-size: 16.3px; white-space: pre;" transform="matrix(1.962064, 0, 0, 1.552877, 68.376343, -160.954315)" x="76.163" y="620.285">K</text>
+  <ellipse style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" cx="136.628" cy="702.972" rx="16.861" ry="16.861" transform="matrix(0.898795, -0.43837, 0.43837, 0.898795, -287.44281, 138.663605)"/>
+  <rect x="124.628" y="677.81" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0.898795, -0.43837, 0.43837, 0.898795, -287.448761, 138.655853)"/>
+  <rect x="124.628" y="676.81" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0.829038, 0.559193, -0.559193, 0.829038, 398.050293, 90.047104)"/>
+  <rect x="124.628" y="676.81" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0.069757, -0.997564, 0.997564, 0.069757, -520.781616, 800.708496)"/>
+  <ellipse style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" cx="136.628" cy="702.972" rx="16.861" ry="16.861" transform="matrix(0.719341, -0.694657, 0.694657, 0.719341, -460.087677, 192.34404)"/>
+  <rect x="124.628" y="677.81" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0.719341, -0.694657, 0.694657, 0.719341, -460.110565, 192.328323)"/>
+  <rect x="124.628" y="676.81" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0.961262, 0.275637, -0.275637, 0.961262, 176.816864, -65.732208)"/>
+  <rect x="124.628" y="676.81" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(-0.241921, -0.970296, 0.970296, -0.241921, -477.437775, 894.081604)"/>
+  <ellipse style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" cx="136.628" cy="702.972" rx="16.861" ry="16.861" transform="matrix(0.961261, 0.275639, -0.275639, 0.961261, 277.617706, -94.25528)"/>
+  <rect x="124.628" y="677.81" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0.961261, 0.275639, -0.275639, 0.961261, 277.618896, -94.274857)"/>
+  <rect x="124.628" y="676.81" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0.241923, 0.970295, -0.970295, 0.241923, 819.56958, 328.290192)"/>
+  <rect x="124.628" y="676.81" width="24" height="5.814" style="fill: rgb(190, 204, 213); stroke: rgb(139, 166, 180);" transform="matrix(0.71934, -0.694658, 0.694658, 0.71934, -338.780853, 241.595978)"/>
+  <rect x="29.639" y="145.153" width="293" height="8" style="fill: rgb(140, 141, 143); paint-order: fill; fill-rule: nonzero;" transform="matrix(0, 1, -1, 0, 417.896545, 494.360962)"/>
+  <rect x="-524.908" y="-527.573" width="260" height="8" style="fill: rgb(140, 141, 143); paint-order: fill; fill-rule: nonzero;" transform="matrix(-1, 0, 0, -1, 0, 0)"/>
+  <rect x="26.989" y="455.579" width="63" height="8" style="fill: rgb(140, 141, 143); paint-order: fill; fill-rule: nonzero;"/>
+  <rect x="26.989" y="519.579" width="63" height="8" style="fill: rgb(140, 141, 143); paint-order: fill; fill-rule: nonzero;"/>
+</svg>

@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Dashboard, StartScreen } from "../screens";
 import ProductsScreen from "../screens/ProductsScreen";
 import ShoppingListsScreen from "../screens/ShoppingListsScreen";
+import MapScreen from "../screens/MapScreen";
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { NavigationContainer } from "@react-navigation/native";
 import { theme } from '../core/theme'
@@ -11,7 +12,10 @@ const Tab = createBottomTabNavigator();
 
 const productsName = 'Products'
 const shoppingListsName = 'Shopping List'
+const mapName = 'Map'
 
+const mapIcon = 'map'
+const mapIconOutline = 'map-outline'
 const cartIcon = 'cart'
 const cartIconOutline = 'cart-outline'
 const productsIcon = 'bag'
@@ -32,6 +36,8 @@ export default function MyTabs({ userData }) {
                         iconName = focused ? productsIcon : productsIconOutline
                     } else if (routeName === shoppingListsName) {
                         iconName = focused ? cartIcon : cartIconOutline
+                    } else if (routeName === mapName) {
+                        iconName = focused ? mapIcon : mapIconOutline
                     }
 
                     return <Ionicons name={iconName} size={size} color={color}></Ionicons>
@@ -45,6 +51,9 @@ export default function MyTabs({ userData }) {
             </Tab.Screen>
             <Tab.Screen name={shoppingListsName}>
                 {() => <ShoppingListsScreen userData={userData} />}
+            </Tab.Screen>
+            <Tab.Screen name={mapName}>
+                {() => <MapScreen userData={userData} />}
             </Tab.Screen>
         </Tab.Navigator>
 

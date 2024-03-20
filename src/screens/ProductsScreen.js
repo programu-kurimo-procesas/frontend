@@ -6,6 +6,7 @@ import Background from '../components/Background';
 import { LinearGradient } from 'expo-linear-gradient';
 import { theme } from '../core/theme';
 import { addItemToList } from '../helpers/addToList';
+import BaseUrl from '../const/base_url';
 const ProductsScreen = ({userData}) => {
     console.log(userData);
     const [isLoading, setLoading] = useState(true);
@@ -16,7 +17,7 @@ const ProductsScreen = ({userData}) => {
     const [modalVisible, setModalVisible] = useState(false);
 
     const fetchProducts = () => {
-        fetch('http://192.168.0.145/Product/GetAll')
+        fetch(BaseUrl() + 'Product/GetAll')
             .then((response) => response.json())
             .then((json) => setData(json))
             .catch((error) => console.error(error))
@@ -29,7 +30,7 @@ const ProductsScreen = ({userData}) => {
     useEffect(() => {
         const fetchData = async () => {
             const promises = data.map(async (item) => {
-                const response = await fetch('http://192.168.0.145/Product/GetImageById', {
+                const response = await fetch(BaseUrl() + 'Product/GetImageById', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -126,7 +127,7 @@ const ProductsScreen = ({userData}) => {
                 </View>
             </Modal>
             <Button style={styles.modalButton} mode={'contained'} onPress={sortData}>
-                Sort Items
+                Sort By Price
             </Button>
             <FlatList
                 data={data}

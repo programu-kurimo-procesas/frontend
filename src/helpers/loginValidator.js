@@ -5,7 +5,7 @@ const useLoginValidator = (login) => {
     const [userData, setUserData] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('http://192.168.0.145/User/GetUserByEmailAndPass', {
+            const response = await fetch(BaseUrl() + 'User/GetUserByEmailAndPass', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -1,3 +1,3 @@
 export default function BaseUrl() {
-    return 'http://192.168.0.145/'
+    return 'http://192.168.229.199/'
 }

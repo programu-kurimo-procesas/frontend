@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-
+import BaseUrl from '../const/base_url'
 export function addItemToList(selectedItemId, userId) {
     const fetchData = async () => {
         let data = null;
         try {
-            const response = await fetch('http://192.168.0.145/ShoppingList/AddProductToList', {
+            const response = await fetch(BaseUrl() + 'ShoppingList/AddProductToList', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

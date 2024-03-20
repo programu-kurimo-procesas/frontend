@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { theme } from './src/core/theme'
 import { useState } from 'react'
+import { LogBox } from 'react-native'
 import {
   StartScreen,
   LoginScreen,
@@ -14,6 +15,7 @@ import {
 import MyTabs from './src/components/NavBar'
 
 const Stack = createStackNavigator()
+LogBox.ignoreAllLogs();
 
 export default function App() {
   const [userData, setUserData] = useState(null); // Initialize userData state

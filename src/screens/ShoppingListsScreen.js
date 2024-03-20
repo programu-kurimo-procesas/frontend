@@ -8,6 +8,7 @@ import { FlatList } from "react-native";
 import { theme } from '../core/theme';
 import { Modal } from "react-native";
 import Button from "../components/Button";
+import BaseUrl from '../const/base_url'
 import { useNavigation } from "@react-navigation/native";
 export default function ShoppingListsScreen({ userData }) {
     console.log('Shopping list screen\n' + userData.id);
@@ -17,7 +18,7 @@ export default function ShoppingListsScreen({ userData }) {
     const [isLoading, setLoading] = useState(true);
     const [selectedItem, setSelectedItem] = useState(null);
     const fetchProducts = () => {
-        fetch('http://192.168.0.145/ShoppingList/GetAllProductsById/' + userData.id)
+        fetch(BaseUrl() + 'ShoppingList/GetAllProductsById/' + userData.id)
             .then((response) => response.json())
             .then((json) => setProducts(json))
             .catch((error) => console.error(error))
@@ -43,7 +44,7 @@ export default function ShoppingListsScreen({ userData }) {
     }
     const deleteFromList = async () => {
         try {
-            const response = await fetch('http://192.168.0.145/ShoppingList/RemoveProductFromList', {
+            const response = await fetch(BaseUrl() + 'ShoppingList/RemoveProductFromList', {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
