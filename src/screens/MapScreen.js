@@ -1,40 +1,36 @@
+import React, { useEffect, useState, } from "react";
+import { ImageBackground, StyleSheet, View, Dimensions, Text, Image, Animated } from "react-native";
+import { PanGestureHandler } from 'react-native-gesture-handler';
+import { Picker } from '@react-native-picker/picker';
+import { clamp } from "react-native-reanimated";
 
 import Background from "../components/Background";
-import React from "react";
-import { useCallback, useState, useEffect, useRef } from "react";
-import { ImageBackground, StyleSheet, View, Dimensions, TouchableOpacity, Text } from "react-native";
 import { theme } from '../core/theme';
-import { Image, Animated, TouchableWithoutFeedback } from "react-native";
-import { PinchGestureHandler, PanGestureHandler, State } from 'react-native-gesture-handler';
-import { Picker } from '@react-native-picker/picker';
-import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 import useGetStores from '../helpers/getStores';
-import { clamp } from "react-native-reanimated";
 import BaseUrl from "../const/base_url";
 import useGetShelves from "../helpers/getShelves";
-import MapButton from "../components/ShelfButton";
-import Tooltip from "../components/Tooltip";
-import { Modal } from "react-native-paper";
-import Button from "../components/Button"
 import ShelfButton from "../components/ShelfButton";
 export default function MapScreen({ userData }) {
-
-    const [selectedItem, setSelectedItem] = useState();
+    console.log("mapscreen")
+    const [selectedItem, setSelectedItem] = useState(null);
     const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
-    const shelves = useGetShelves(selectedItem);
+
     const [showTooltip, setShowTooltip] = useState(0);
-    const [selectedShelfPosition, setSelectedShelfPosition] = useState({ x: 0, y: 0 })
+    const [selectedShelfPosition, setSelectedShelfPosition] = useState({ x1: 0, y1: 0, x2: 0, y2: 0 })
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
     const [imagePosition, setImagePosition] = useState({ x: 0, y: 0 });
-
+    const [itemInShelves, setItemInShelves] = useState([]);
 
     const storeData = useGetStores();
+    const shelves = useGetShelves(selectedItem);
+    const [mapData, setMapData] = useState(null);
 
-    const [mapData, setMapData] = useState();
+
     const onPickerValueChange = async () => {
         const fetchData = async () => {
-            console.log(selectedItem);
+
+            console.log("this is the picker change event");
             const response = await fetch(BaseUrl() + 'Store/GetMap/' + selectedItem, {
                 method: 'GET',
             });
@@ -51,32 +47,26 @@ export default function MapScreen({ userData }) {
             reader.readAsDataURL(blob);
         };
         await fetchData();
+        setImagePosition({ x: 0, y: 0 });
     };
 
-    const scale = React.useRef(new Animated.Value(1)).current;
-
-
-    const handlePinch = Animated.event([{
-        nativeEvent: { scale }
-    }])
 
 
     const onPanGestureEvent = (event) => {
-        // Calculate new image position based on translation
         const newX = imagePosition.x + event.nativeEvent.translationX / 8;
         const newY = imagePosition.y + event.nativeEvent.translationY / 8;
 
-        // Clamp the new position within screen boundaries
-        const clampedX = clamp(newX, -(imageSize.width - windowWidth), 0)
+        const clampedX = clamp(newX, -(imageSize.width - windowWidth + 50), 0)
         const clampedY = Math.max(0, Math.min(newY, windowHeight - imageSize.height));
 
-        // Update image position state
         setImagePosition({ x: clampedX, y: clampedY });
     };
+
     const handlePressIn = (event, id) => {
         if (id == undefined) {
             setShowTooltip(0);
-            setSelectedShelfPosition({x:0, y:0})
+            setSelectedShelfPosition({ x1: 0, y1: 0, x2: 0, y2: 0 })
+            setItemInShelves([]);
             return;
         }
         const fetchData = async (id) => {
@@ -85,29 +75,25 @@ export default function MapScreen({ userData }) {
                 method: 'GET',
             });
             const data = await response.json();
-            console.log(data)
-            console.log('id: ' + element.id + '\n' + data[0].name);
+            setItemInShelves(data);
+            setShowTooltip(1);
         };
-
         fetchData(id);
-        setShowTooltip(1);
-        
-
     };
-
-
-    const panRef = React.useRef(null);
     return (
         <Background>
             <View>
                 <Picker
                     selectedValue={selectedItem}
                     onValueChange={(itemValue, itemIndex) => {
-                        setSelectedItem(itemValue);
-                        onPickerValueChange();
+                        if (itemValue !== null) {
+                            setSelectedItem(itemValue);
+                            onPickerValueChange();
+                        }
                     }}
                     style={pickerStyles.picker}
                     itemStyle={pickerStyles.pickerItem}>
+                    <Picker.Item style={{backgroundColor: '#f0f0f0'}}label="Select a store..." value={null} enabled={false} />
                     {storeData.map((item, index) => (
                         <Picker.Item label={item.name} value={item.id} />
                     ))}
@@ -115,7 +101,6 @@ export default function MapScreen({ userData }) {
             </View>
             <View>
                 <PanGestureHandler
-                    ref={panRef}
                     onGestureEvent={onPanGestureEvent}>
                     <Animated.View>
                         <Animated.View
@@ -125,7 +110,7 @@ export default function MapScreen({ userData }) {
                                     { translateX: imagePosition.x },
                                     { translateY: imagePosition.y },],
                             },]}>
-                            <ImageBackground
+                            {mapData && <ImageBackground
                                 style={{
                                     width: imageSize.width,
                                     height: imageSize.height,
@@ -136,19 +121,34 @@ export default function MapScreen({ userData }) {
                                 {shelves && shelves.map((button) => (
                                     <ShelfButton key={button.id} button={button} onPress={(event) => {
                                         handlePressIn(event, button.id);
-                                        console.log(button.x1, button.y1)
-                                        setSelectedShelfPosition({x: button.x1, y: button.y1})
-                                        console.log(selectedShelfPosition)
+                                        setSelectedShelfPosition({ x1: button.x1, y1: button.y1, x2: button.x2, y2: button.y2 })
                                     }} />
                                 ))}
                                 <Animated.View style={[styles.myView, {
-                                    opacity: showTooltip, 
-                                    top: parseInt(selectedShelfPosition.y),
-                                    left: parseInt(selectedShelfPosition.x),
+                                    opacity: showTooltip,
+                                    bottom: imageSize.height - parseInt(selectedShelfPosition.y1) + 9,
+                                    left: parseInt(selectedShelfPosition.x1) - 33,
                                 }]}>
-                                    <Text>This view's visibility fades</Text>
+                                    {
+                                        itemInShelves.length > 0
+                                            ? itemInShelves.map((item) => (
+                                                <Text>
+                                                    {item.name}
+                                                </Text>
+                                            ))
+                                            : <Text>No items found in selected shelf</Text>
+                                    }
                                 </Animated.View>
+                                <View
+
+                                    style={[styles.triangle, {
+                                        bottom: imageSize.height - parseInt(selectedShelfPosition.y1),
+                                        left: parseInt(selectedShelfPosition.x1) + (parseInt(selectedShelfPosition.x2) - parseInt(selectedShelfPosition.x1)) / 2 - 5,
+                                        opacity: showTooltip,
+                                    }]}
+                                ></View>
                             </ImageBackground>
+                            }
                         </Animated.View>
                     </Animated.View>
                 </PanGestureHandler >
@@ -161,94 +161,38 @@ export default function MapScreen({ userData }) {
 const pickerStyles = StyleSheet.create({
     picker: {
         width: "100%",
-        backgroundColor: '#f0f0f0', // Light gray background
-        borderRadius: 8, // Adjust border radius for desired curve
+        backgroundColor: '#f0f0f0',
+        borderRadius: 8,
         paddingHorizontal: 10,
-        // Add horizontal padding for content spacing
-        shadowColor: '#000000', // Add shadow for depth (optional)
-        shadowOffset: { width: 0, height: 2 }, // Adjust shadow offset
-        shadowOpacity: 0.2, // Set shadow opacity
-        shadowRadius: 2, // Control shadow blur
+        shadowColor: '#000000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
     },
     pickerItem: {
-        color: '#333333', // Darker text for better contrast
-        fontSize: 16,  // Set your preferred font family (optional)
+        color: '#333333',
+        fontSize: 16,
     },
 });
+
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 15,
-        marginVertical: 5,
-        borderRadius: 10,
-        elevation: 3,
-    },
-    content: {
-        flex: 1,
-    },
-    name: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: '#333',
-        marginBottom: 5,
-    },
-    price: {
-        fontSize: 16,
-        color: '#888',
-    },
-    removeButton: {
-        width: 40,
-        height: 40,
-        borderRadius: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#FFF',
-        marginLeft: 10,
-    },
-    gradient: {
-        width: '100%',
-        height: '100%',
-        borderRadius: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    removeButtonText: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: theme.colors.primary,
-    },
-    modalContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-    },
-
     myView: {
-        backgroundColor: '#f0f0f0',
+        backgroundColor: theme.colors.primaryLight,
         position: 'absolute',
-
+        width: 100,
     },
-    modalContent: {
-        backgroundColor: 'white',
-        borderRadius: 10,
-        padding: 20,
-        alignItems: 'center',
-        elevation: 5,
-        width: '80%',
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 10,
-    },
-    message: {
-        fontSize: 16,
-        marginBottom: 20,
-        textAlign: 'center',
+    triangle: {
+        position: 'absolute',
+        width: 0,
+        height: 0,
+        borderStyle: 'solid',
+        borderTopWidth: 10,
+        borderRightWidth: 5,
+        borderBottomWidth: 0,
+        borderLeftWidth: 5,
+        borderTopColor: theme.colors.primaryLight,
+        borderRightColor: 'transparent',
+        borderBottomColor: 'transparent',
+        borderLeftColor: 'transparent',
     },
 });
