@@ -2,20 +2,21 @@
 import React, { useEffect, useState } from 'react';
 import { View, FlatList, StyleSheet, Text, Image, Pressable, Modal, TouchableOpacity } from 'react-native';
 import Button from '../components/Button';
+import { useNavigation } from '@react-navigation/native';
 import Background from '../components/Background';
 import { LinearGradient } from 'expo-linear-gradient';
 import { theme } from '../core/theme';
 import { addItemToList } from '../helpers/addToList';
 import BaseUrl from '../const/base_url';
-const ProductsScreen = ({userData}) => {
-    console.log(userData);
+const ProductsScreen = ({ userData }) => {
+    navigation = useNavigation();
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const [imageUris, setImageUris] = useState({});
     const [selectedItem, setSelectedItem] = useState(null);
     const [selectedItemImage, setSelectedItemImage] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
-
+    const [stores, setStores] = useState([]);
     const fetchProducts = () => {
         fetch(BaseUrl() + 'Product/GetAll')
             .then((response) => response.json())
@@ -26,6 +27,21 @@ const ProductsScreen = ({userData}) => {
     useEffect(() => {
         fetchProducts();
     }, []);
+
+    useEffect(() => {
+        if (!selectedItem) {
+            setStores([]);
+            return;
+        }
+        console.log(selectedItem);
+        fetch(BaseUrl() + 'Store/GetAllContainingProduct/' + selectedItem.id)
+            .then((response) => {
+                console.log(response);
+                return response.json()
+            }
+            )
+            .then((json) => setStores(json))
+    }, [selectedItem]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -88,7 +104,7 @@ const ProductsScreen = ({userData}) => {
         setModalVisible(false);
     };
 
-    const addItem = async() => {
+    const addItem = async () => {
         let response = await addItemToList(selectedItem.id, userData.id);
         if (response === "Product already in list") {
             alert("Product already in list");
@@ -120,6 +136,37 @@ const ProductsScreen = ({userData}) => {
                                 <Text style={styles.itemPrice}>{selectedItem?.price} €</Text>
                             </View>
                         </View>
+                        <Text style={[styles.itemName, { alignSelf: 'flex-start', marginLeft: 15 }]}>Available in:</Text>
+                        {stores ?
+                            stores.map((store) => {
+                                return (
+                                    <LinearGradient
+                                        colors={['#FFFFFF', theme.colors.primary]}
+                                        end={{ x: 1, y: 5 }}
+                                        style={storeListStyle.container}
+                                    >
+                                            <Text style={styles.itemName}>{store.name}</Text>
+                                            <TouchableOpacity style={storeListStyle.removeButton} onPress={() => {
+                                                navigation.navigate('Map', {
+                                                    params: {
+                                                        products: [selectedItem],
+                                                        storeId: store.id,
+                                                        randomParam: Math.floor(Math.random() * 1000) + 1
+                                                    }
+                                                })
+                                                closeModal();
+                                            }}>
+                                                <LinearGradient
+                                                    colors={['#FFFFFF', theme.colors.primary]}
+                                                    end={{ x: 1, y: 5 }}
+                                                    style={storeListStyle.gradient}
+                                                >
+                                                    <Text style={storeListStyle.removeButtonText}>{'->'}</Text>
+                                                </LinearGradient>
+                                            </TouchableOpacity>
+                                    </LinearGradient>
+                                );
+                            }) : <View>Unfortunately, this </View>}
                         <Button mode={'contained'} onPress={addItem} >
                             Add to List
                         </Button>
@@ -138,7 +185,41 @@ const ProductsScreen = ({userData}) => {
         </Background>
     );
 };
-
+const storeListStyle = StyleSheet.create({
+    gradient: {
+        width: '100%',
+        height: '100%',
+        borderRadius: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    
+    container: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 15,
+        marginVertical: 5,
+        borderRadius: 10,
+        elevation: 3,
+        width: '93%',
+    },
+    removeButton: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'absolute',
+        right: 10,
+        backgroundColor: '#FFF',
+        marginLeft: 10,
+    },
+    removeButtonText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: theme.colors.primary,
+    },
+});
 const styles = StyleSheet.create({
     item: {
         padding: 20,

@@ -25,11 +25,8 @@ export default function ShoppingListsScreen({ userData }) {
         console.log("ASIHDFASHUDFH")
         const fetchData = async () => {
             const promises = stores.map(async (store) => {
-                console.log(userData.id, store.id)
                 const response = await fetch(BaseUrl() + 'ShoppingList/GetQuantityInStore/' + userData.id + '/' + store.id);
-                console.log(response)
                 const data = await response.json();
-                console.log('hmmm???????????')
                 return { id: store.id, quantity: data.quantity }; // assuming the quantity is returned in the "quantity" field
             });
             const results = await Promise.all(promises);
@@ -264,6 +261,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         marginLeft: 10,
     },
+    removeButtonText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: theme.colors.primary,
+    },
     gradient: {
         width: '100%',
         height: '100%',
@@ -271,11 +273,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    removeButtonText: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: theme.colors.primary,
-    },
+    
     modalContainer: {
         flex: 1,
         justifyContent: 'center',
