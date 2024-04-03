@@ -4,10 +4,11 @@ import ProductsScreen from "../screens/ProductsScreen";
 import ShoppingListsScreen from "../screens/ShoppingListsScreen";
 import MapScreen from "../screens/MapScreen";
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { theme } from '../core/theme'
 import Logo from "./Logo";
 import { Image, StyleSheet } from "react-native";
+
 const Tab = createBottomTabNavigator();
 
 const productsName = 'Products'
@@ -21,7 +22,7 @@ const cartIconOutline = 'cart-outline'
 const productsIcon = 'bag'
 const productsIconOutline = 'bag-outline'
 
-export default function MyTabs({ userData }) {
+export default function MyTabs({ userData}) {
     console.log('My Tabs:\n' + userData.id);
     return (
         <Tab.Navigator
@@ -53,7 +54,7 @@ export default function MyTabs({ userData }) {
                 {() => <ShoppingListsScreen userData={userData} />}
             </Tab.Screen>
             <Tab.Screen name={mapName}>
-                {() => <MapScreen userData={userData} />}
+                {() => <MapScreen userData={userData} products={null} />}
             </Tab.Screen>
         </Tab.Navigator>
 

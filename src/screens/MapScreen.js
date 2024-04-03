@@ -1,8 +1,10 @@
 import React, { useEffect, useState, } from "react";
-import { ImageBackground, StyleSheet, View, Dimensions, Text, Image, Animated } from "react-native";
-import { PanGestureHandler } from 'react-native-gesture-handler';
+import { ImageBackground, StyleSheet, View, Dimensions, Text, Image, Animated, TouchableOpacity } from "react-native";
+import { FlatList, PanGestureHandler } from 'react-native-gesture-handler';
 import { Picker } from '@react-native-picker/picker';
 import { clamp } from "react-native-reanimated";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 
 import Background from "../components/Background";
 import { theme } from '../core/theme';
@@ -10,8 +12,10 @@ import useGetStores from '../helpers/getStores';
 import BaseUrl from "../const/base_url";
 import useGetShelves from "../helpers/getShelves";
 import ShelfButton from "../components/ShelfButton";
+
 export default function MapScreen({ userData }) {
-    console.log("mapscreen")
+    const route = useRoute();
+
     const [selectedItem, setSelectedItem] = useState(null);
     const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
 
@@ -23,12 +27,29 @@ export default function MapScreen({ userData }) {
     const [itemInShelves, setItemInShelves] = useState([]);
 
     const storeData = useGetStores();
-    const shelves = useGetShelves(selectedItem);
     const [mapData, setMapData] = useState(null);
+    const [shelves, setShelves] = useState(null);
+    const [passedProducts, setPassedProducts] = useState(null);
+    const [passedStoreId, setPassedStoreId] = useState(null);
 
+    const [randomPassId, setRandomPassId] = useState(null);
+    useEffect(() => {
+        if (route.params) {
+            const someData = route.params?.params;
+            setPassedProducts(someData.products);
+            setPassedStoreId(someData.storeId);
+            setRandomPassId(someData.randomParam);
+        } else {
+            console.log('No data passed in route params');
+        }
+    }, [route.params]);
 
-    const onPickerValueChange = async () => {
-        const fetchData = async () => {
+    useEffect(() => {
+        setSelectedItem(passedStoreId);
+    }, [randomPassId]);
+
+    useEffect(() => {
+        const fetchDataMap = async () => {
 
             console.log("this is the picker change event");
             const response = await fetch(BaseUrl() + 'Store/GetMap/' + selectedItem, {
@@ -46,20 +67,36 @@ export default function MapScreen({ userData }) {
             };
             reader.readAsDataURL(blob);
         };
-        await fetchData();
-        setImagePosition({ x: 0, y: 0 });
-    };
+        const fetchDataShelf = async () => {
+            console.log('fetching started' + selectedItem)
+            const response = await fetch(BaseUrl() + 'Shelf/GetAllByStoreId/' + selectedItem, {
+                method: 'GET',
+            });
+            const data = await response.json();
+            setShelves(data);
+            console.log('data fetched of shelves' + selectedItem)
+        };
+        if (selectedItem) {
+            fetchDataMap();
+            setImagePosition({ x: 0, y: 0 });
+            fetchDataShelf();
+        }
 
+    }, [selectedItem]);
 
+    const moveImage = (x, y) => {
+
+        const clampedX = clamp(x, -(imageSize.width - windowWidth + 50), 0)
+        const clampedY = Math.max(0, Math.min(y, windowHeight - imageSize.height));
+
+        setImagePosition({ x: clampedX, y: clampedY });
+    }
 
     const onPanGestureEvent = (event) => {
         const newX = imagePosition.x + event.nativeEvent.translationX / 8;
         const newY = imagePosition.y + event.nativeEvent.translationY / 8;
 
-        const clampedX = clamp(newX, -(imageSize.width - windowWidth + 50), 0)
-        const clampedY = Math.max(0, Math.min(newY, windowHeight - imageSize.height));
-
-        setImagePosition({ x: clampedX, y: clampedY });
+        moveImage(newX, newY);
     };
 
     const handlePressIn = (event, id) => {
@@ -80,6 +117,52 @@ export default function MapScreen({ userData }) {
         };
         fetchData(id);
     };
+
+    function onListItemClick(item) {
+        console.log(item);
+        console.log(selectedItem, item.id)
+        fetch(BaseUrl() + 'Shelf/GetByProductIdAndStoreId/' + item.id + '/' + selectedItem, {
+            method: 'GET',
+        }).then((response) => response.json())
+            .then((data) => {
+                if (data.error != null) {
+                    alert('Item not found in any shelf');
+                    return;
+                }
+                shelves.forEach(element => {
+                    
+                    console.log(selectedItem)
+                    console.log(data, element.id)
+                    if (element.id == parseInt(data)) {
+                        moveImage(-parseInt(element.x1) + windowWidth / 2, -parseInt(element.y1));
+
+                        setSelectedShelfPosition({ x1: element.x1, y1: element.y1, x2: element.x2, y2: element.y2 })
+                        handlePressIn(null, element.id);
+
+                    }
+                });
+            })
+            .catch((error) => console.error(error));
+    }
+    const renderItem = ({ item }) => {
+        console.log(item)
+        return (
+            <LinearGradient
+                colors={['#FFFFFF', theme.colors.primary]}
+                end={{ x: 1, y: 5 }}
+                style={itemStyles.container}
+            >
+                <View style={itemStyles.content}>
+                    <TouchableOpacity onPress={() => {
+                        onListItemClick(item);
+                    }}>
+                        <Text style={itemStyles.name}>{item.name}</Text>
+                    </TouchableOpacity>
+                </View>
+            </LinearGradient>
+        );
+    }
+
     return (
         <Background>
             <View>
@@ -88,12 +171,11 @@ export default function MapScreen({ userData }) {
                     onValueChange={(itemValue, itemIndex) => {
                         if (itemValue !== null) {
                             setSelectedItem(itemValue);
-                            onPickerValueChange();
                         }
                     }}
                     style={pickerStyles.picker}
                     itemStyle={pickerStyles.pickerItem}>
-                    <Picker.Item style={{backgroundColor: '#f0f0f0'}}label="Select a store..." value={null} enabled={false} />
+                    <Picker.Item style={{ backgroundColor: '#f0f0f0' }} label="Select a store..." value={null} enabled={false} />
                     {storeData.map((item, index) => (
                         <Picker.Item label={item.name} value={item.id} />
                     ))}
@@ -153,11 +235,89 @@ export default function MapScreen({ userData }) {
                     </Animated.View>
                 </PanGestureHandler >
             </View>
+            {passedProducts && <FlatList style={{ width: '100%', position: 'absolute', alignSelf: 'center', height: 150, bottom: 10 }}
+                data={passedProducts}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+                numColumns={1}
+            />
+            }
         </Background >
     )
 
 
 };
+const itemStyles = StyleSheet.create({
+    container: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 15,
+        marginVertical: 5,
+        borderRadius: 10,
+        elevation: 3,
+    },
+    content: {
+        flex: 1,
+    },
+    name: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#333',
+        marginBottom: 5,
+    },
+    price: {
+        fontSize: 16,
+        color: '#888',
+    },
+    removeButton: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#FFF',
+        marginLeft: 10,
+    },
+    gradient: {
+        width: '100%',
+        height: '100%',
+        borderRadius: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    removeButtonText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: theme.colors.primary,
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+    },
+    modalContent: {
+        backgroundColor: 'white',
+        borderRadius: 10,
+        padding: 20,
+        alignItems: 'center',
+        elevation: 5,
+        width: '80%',
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    message: {
+        fontSize: 16,
+        marginBottom: 20,
+        textAlign: 'center',
+    },
+});
 const pickerStyles = StyleSheet.create({
     picker: {
         width: "100%",

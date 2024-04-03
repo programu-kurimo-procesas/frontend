@@ -10,13 +10,44 @@ import { Modal } from "react-native";
 import Button from "../components/Button";
 import BaseUrl from '../const/base_url'
 import { useNavigation } from "@react-navigation/native";
+import useGetStores from "../helpers/getStores";
 export default function ShoppingListsScreen({ userData }) {
-    console.log('Shopping list screen\n' + userData.id);
     const navigation = useNavigation();
     const [products, setProducts] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
+    const [selectMapModalVisible, setSelectMapModalVisible] = useState(false);
     const [isLoading, setLoading] = useState(true);
     const [selectedItem, setSelectedItem] = useState(null);
+    const stores = useGetStores();
+    const [storeQuantities, setStoreQuantities] = useState(null);
+
+    useEffect(() => {
+        console.log("ASIHDFASHUDFH")
+        const fetchData = async () => {
+            const promises = stores.map(async (store) => {
+                console.log(userData.id, store.id)
+                const response = await fetch(BaseUrl() + 'ShoppingList/GetQuantityInStore/' + userData.id + '/' + store.id);
+                console.log(response)
+                const data = await response.json();
+                console.log('hmmm???????????')
+                return { id: store.id, quantity: data.quantity }; // assuming the quantity is returned in the "quantity" field
+            });
+            const results = await Promise.all(promises);
+            console.log('results' + results)
+            results.forEach(result => {
+                setStoreQuantities(prevState => ({
+                    ...prevState,
+                    [result.id]: result.quantity,
+                }));
+            });
+        };
+        fetchData();
+    }, [stores]);
+    const GetQuantityInStore = (storeId) => {
+        fetch(BaseUrl() + '/ShoppingList/GetQuantityInStore/' + userData.id + '/' + storeId)
+            .then((response) => response.json())
+            .then((json) => { return json.quantity })
+    }
     const fetchProducts = () => {
         fetch(BaseUrl() + 'ShoppingList/GetAllProductsById/' + userData.id)
             .then((response) => response.json())
@@ -42,6 +73,10 @@ export default function ShoppingListsScreen({ userData }) {
         setSelectedItem(null);
         fetchProducts();
     }
+
+    const onSelectMapModalClose = () => {
+        setSelectMapModalVisible(false);
+    }
     const deleteFromList = async () => {
         try {
             const response = await fetch(BaseUrl() + 'ShoppingList/RemoveProductFromList', {
@@ -55,12 +90,10 @@ export default function ShoppingListsScreen({ userData }) {
                 }),
             });
             const json = await response.json();
-            console.log(json);
         } catch (error) {
-            console.error(error);
         }
     }
-    const onConfirm = async() => {
+    const onConfirm = async () => {
         await deleteFromList();
 
         fetchProducts();
@@ -71,8 +104,45 @@ export default function ShoppingListsScreen({ userData }) {
 
     }
 
+
+    const renderStoreItem = ({ item }) => {
+        const quantity = storeQuantities[item.id]
+        return <LinearGradient
+            colors={['#FFFFFF', theme.colors.primary]}
+            end={{ x: 1, y: 5 }}
+            style={styles.container}
+        >
+            <View style={styles.content}>
+                <Text style={styles.name}>{item.name}</Text>
+                <Text style={{
+                    color: quantity === 0 ? 'red' :
+                        quantity < products.length ? 'orange' :
+                            'green'
+                }}>
+                    {quantity}/{products.length}
+                </Text>
+            </View>
+            <TouchableOpacity style={styles.removeButton} onPress={() => {
+                setSelectMapModalVisible(false);
+                navigation.navigate('Map', {
+                    params: {
+                        products: products,
+                        storeId: item.id,
+                        randomParam: Math.floor(Math.random() * 1000) + 1
+                    }
+                })
+            }}>
+                <LinearGradient
+                    colors={['#FFFFFF', theme.colors.primary]}
+                    end={{ x: 1, y: 5 }}
+                    style={styles.gradient}
+                >
+                    <Text style={styles.removeButtonText}>{'->'}</Text>
+                </LinearGradient>
+            </TouchableOpacity>
+        </LinearGradient>
+    }
     const renderItem = ({ item }) => {
-        console.log(item)
         return (
             <LinearGradient
                 colors={['#FFFFFF', theme.colors.primary]}
@@ -99,7 +169,6 @@ export default function ShoppingListsScreen({ userData }) {
             </LinearGradient>
         );
     }
-    console.log(products)
     return (
         <Background>
 
@@ -109,6 +178,7 @@ export default function ShoppingListsScreen({ userData }) {
                 visible={modalVisible}
                 onRequestClose={onClose}
             >
+
                 <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
                         <Text style={styles.title}>Delete Confirmation</Text>
@@ -125,13 +195,42 @@ export default function ShoppingListsScreen({ userData }) {
                     </View>
                 </View>
             </Modal>
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={selectMapModalVisible}
+                onRequestClose={onSelectMapModalClose}
+            >
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalContent}>
+                        <TouchableOpacity style={styles.closeButton} onPress={() =>
+                            setSelectMapModalVisible(false)
+                        }>
+                            <Text style={styles.closeButtonText}>X</Text>
+                        </TouchableOpacity>
+                        <Text style={styles.title}>Select store</Text>
+                        <FlatList style={{ width: '100%' }}
+                            data={stores}
+                            renderItem={renderStoreItem}
+                            keyExtractor={item => item.id}
+                            numColumns={1}
+                        />
+
+                    </View>
+                </View>
+            </Modal>
             <FlatList style={{ width: '100%' }}
                 data={products}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
                 numColumns={1}
             />
+
+            <Button style={{ marginTop: 10 }} mode="contained" onPress={() => setSelectMapModalVisible(true)}>
+                View in Map
+            </Button>
         </Background>
+
     )
 };
 const styles = StyleSheet.create({
@@ -203,5 +302,14 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginBottom: 20,
         textAlign: 'center',
+    },
+    closeButton: {
+        position: 'absolute',
+        top: 10,
+        right: 10,
+    },
+    closeButtonText: {
+        fontSize: 20,
+        fontWeight: 'bold',
     },
 });

@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 import BaseUrl from "../const/base_url";
 
-const useGetShelves = (storeId) => {
+const useGetShelves = (storeId, mapData) => {
     console.log("getShelves")
-    // if (storeId === null) {
-    //     return;
-    // }
+    console.log(storeId)
     const [data, setData] = useState(null);
     useEffect(() => {
         const fetchData = async () => {
@@ -18,9 +16,7 @@ const useGetShelves = (storeId) => {
         if (storeId) {
             fetchData();
         }
-    }, [storeId]);
-
-
+    }, [mapData]);
     return data;
 };
 
