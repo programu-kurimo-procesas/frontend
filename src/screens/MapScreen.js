@@ -26,6 +26,7 @@ export default function MapScreen({ userData }) {
     const [imagePosition, setImagePosition] = useState({ x: 0, y: 0 });
     const [itemInShelves, setItemInShelves] = useState([]);
 
+    const [fromProducts, setFromProducts] = useState(false);
     const storeData = useGetStores();
     const [mapData, setMapData] = useState(null);
     const [shelves, setShelves] = useState(null);
@@ -36,13 +37,28 @@ export default function MapScreen({ userData }) {
     useEffect(() => {
         if (route.params) {
             const someData = route.params?.params;
+            setSelectedItem(null);
             setPassedProducts(someData.products);
             setPassedStoreId(someData.storeId);
             setRandomPassId(someData.randomParam);
+            if (someData.fromProducts) {
+                setFromProducts(true);
+            } else {
+                setFromProducts(false);
+            }
         } else {
             console.log('No data passed in route params');
         }
     }, [route.params]);
+
+    useEffect(() => {
+        console.log(fromProducts, selectedItem, shelves, passedProducts)
+        if (fromProducts && selectedItem != null && shelves != null) {
+            console.log(passedProducts[0]);
+            onListItemClick(passedProducts[0]);
+        }
+
+    }, [selectedItem, shelves]);
 
     useEffect(() => {
         setSelectedItem(passedStoreId);
@@ -51,7 +67,6 @@ export default function MapScreen({ userData }) {
     useEffect(() => {
         const fetchDataMap = async () => {
 
-            console.log("this is the picker change event");
             const response = await fetch(BaseUrl() + 'Store/GetMap/' + selectedItem, {
                 method: 'GET',
             });
@@ -68,13 +83,11 @@ export default function MapScreen({ userData }) {
             reader.readAsDataURL(blob);
         };
         const fetchDataShelf = async () => {
-            console.log('fetching started' + selectedItem)
             const response = await fetch(BaseUrl() + 'Shelf/GetAllByStoreId/' + selectedItem, {
                 method: 'GET',
             });
             const data = await response.json();
             setShelves(data);
-            console.log('data fetched of shelves' + selectedItem)
         };
         if (selectedItem) {
             fetchDataMap();
@@ -113,39 +126,33 @@ export default function MapScreen({ userData }) {
             });
             const data = await response.json();
             setItemInShelves(data);
+            console.log('tooltip shown');
             setShowTooltip(1);
         };
         fetchData(id);
     };
 
     function onListItemClick(item) {
-        console.log(item);
-        console.log(selectedItem, item.id)
         fetch(BaseUrl() + 'Shelf/GetByProductIdAndStoreId/' + item.id + '/' + selectedItem, {
             method: 'GET',
         }).then((response) => response.json())
             .then((data) => {
                 if (data.error != null) {
-                    alert('Item not found in any shelf');
+                    alert('Item not available in this store');
                     return;
                 }
                 shelves.forEach(element => {
-                    
-                    console.log(selectedItem)
-                    console.log(data, element.id)
                     if (element.id == parseInt(data)) {
+                        console.log('imagemove')
                         moveImage(-parseInt(element.x1) + windowWidth / 2, -parseInt(element.y1));
-
                         setSelectedShelfPosition({ x1: element.x1, y1: element.y1, x2: element.x2, y2: element.y2 })
                         handlePressIn(null, element.id);
-
                     }
                 });
             })
             .catch((error) => console.error(error));
     }
     const renderItem = ({ item }) => {
-        console.log(item)
         return (
             <LinearGradient
                 colors={['#FFFFFF', theme.colors.primary]}
@@ -206,6 +213,13 @@ export default function MapScreen({ userData }) {
                                         setSelectedShelfPosition({ x1: button.x1, y1: button.y1, x2: button.x2, y2: button.y2 })
                                     }} />
                                 ))}
+                                <View
+                                    style={[styles.triangle, {
+                                        bottom: imageSize.height - parseInt(selectedShelfPosition.y1),
+                                        left: parseInt(selectedShelfPosition.x1) + (parseInt(selectedShelfPosition.x2) - parseInt(selectedShelfPosition.x1)) / 2 - 5,
+                                        opacity: showTooltip,
+                                    }]}
+                                ></View>
                                 <Animated.View style={[styles.myView, {
                                     opacity: showTooltip,
                                     bottom: imageSize.height - parseInt(selectedShelfPosition.y1) + 9,
@@ -214,33 +228,38 @@ export default function MapScreen({ userData }) {
                                     {
                                         itemInShelves.length > 0
                                             ? itemInShelves.map((item) => (
-                                                <Text>
-                                                    {item.name}
-                                                </Text>
+                                                <View style={{
+                                                    borderBottomWidth: 1,
+                                                    borderTopWidth: 1,
+                                                    marginVertical: 5,
+                                                }
+                                                }>
+                                                    <Text style={itemStyles.name}>
+                                                        {item.name}
+                                                    </Text>
+                                                </View>
                                             ))
-                                            : <Text>No items found in selected shelf</Text>
+                                            : 
+                                            <View style={itemStyles.content}>
+                                                    <Text style={itemStyles.name}>
+                                                        No items found
+                                                    </Text>
+                                                </View>
                                     }
                                 </Animated.View>
-                                <View
-
-                                    style={[styles.triangle, {
-                                        bottom: imageSize.height - parseInt(selectedShelfPosition.y1),
-                                        left: parseInt(selectedShelfPosition.x1) + (parseInt(selectedShelfPosition.x2) - parseInt(selectedShelfPosition.x1)) / 2 - 5,
-                                        opacity: showTooltip,
-                                    }]}
-                                ></View>
+                                
                             </ImageBackground>
                             }
                         </Animated.View>
                     </Animated.View>
                 </PanGestureHandler >
             </View>
-            {passedProducts && <FlatList style={{ width: '100%', position: 'absolute', alignSelf: 'center', height: 150, bottom: 10 }}
+            {passedProducts && fromProducts == false ? <FlatList style={{ width: '100%', position: 'absolute', alignSelf: 'center', height: 150, bottom: 10 }}
                 data={passedProducts}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
                 numColumns={1}
-            />
+            /> : null
             }
         </Background >
     )
@@ -260,7 +279,7 @@ const itemStyles = StyleSheet.create({
         flex: 1,
     },
     name: {
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: 'bold',
         color: '#333',
         marginBottom: 5,
@@ -340,6 +359,9 @@ const styles = StyleSheet.create({
         backgroundColor: theme.colors.primaryLight,
         position: 'absolute',
         width: 100,
+        padding: 5,
+        borderRadius: 10,
+        elevation: 5,
     },
     triangle: {
         position: 'absolute',
@@ -354,5 +376,6 @@ const styles = StyleSheet.create({
         borderRightColor: 'transparent',
         borderBottomColor: 'transparent',
         borderLeftColor: 'transparent',
+        elevation: 5,
     },
 });
