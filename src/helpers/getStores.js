@@ -6,7 +6,7 @@ const useGetStores = () => {
     useEffect(() => {
         const fetchData = async () => {
             const response = await fetch(BaseUrl() + 'Store/GetAll', {
-                method: 'Get',
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                 },

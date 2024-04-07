@@ -7,7 +7,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "@overlapmedia/imagemapper": "^2.0.6",
@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@testing-library/react-hooks": "^8.0.1",
     "jest-expo": "^50.0.4",
     "jest-fetch-mock": "^3.0.3"
   },
@@ -49,7 +50,7 @@
   "jest": {
     "preset": "jest-expo",
     "transformIgnorePatterns": [
-      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|expo-fetch|-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|@testing-library/react-native|expo-linear-gradient|@overlapmedia/imagemapper|react-native-interactive-image|react-native-status-bar-height|react-native-picker|react-native-action-button|react-native-walkthrough-tooltip|react-native-paper|react-native-maps|react-native-vector-icons|@react-native-picker/picker)"
+      "node_modules/(?!((jest-)?react-native|@testing-library/react-hooks|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|expo-fetch|-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|@testing-library/react-native|expo-linear-gradient|@overlapmedia/imagemapper|react-native-interactive-image|react-native-status-bar-height|react-native-picker|react-native-action-button|react-native-walkthrough-tooltip|react-native-paper|react-native-maps|react-native-vector-icons|@react-native-picker/picker)"
     ]
   }
 }

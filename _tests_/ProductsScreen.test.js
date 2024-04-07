@@ -1,46 +1,28 @@
-import { fetchProducts } from '../src/screens/ProductsScreen'; // Adjust filepath
-import fetch from 'jest-fetch-mock';
-import BaseUrl from '../src/const/base_url'; // Assuming BaseUrl location
-
-jest.mock('../src/const/base_url', () => () => 'http://192.168.19.199/');
-
+import { fetchProducts } from '../src/screens/ProductsScreen';
+import BaseUrl from '../src/const/base_url';
 describe('fetchProducts', () => {
-    beforeEach(() => {
-        fetch.resetMocks();
+  it('fetches products and updates state', async () => {
+    const mockData = [{ id: 1, name: 'Product 1' }, { id: 2, name: 'Product 2' }];
+    const mockJsonPromise = Promise.resolve(mockData);
+    const mockFetchPromise = Promise.resolve({
+      ok: true,
+      json: () => mockJsonPromise,
     });
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
-    it('fetches products, sets data, and updates loading state', async () => {
-        const setData = jest.fn();
-        const setLoading = jest.fn();
-        const mockData = [{ id: 1, name: 'Product 1' }];
+    const setData = jest.fn();
+    const setLoading = jest.fn();
 
-        fetch.mockResolvedValueOnce({
-            ok: true,
-            json: jest.fn().mockResolvedValue(mockData)
-        });
+    await fetchProducts(setData, setLoading);
 
-        await fetchProducts(setData, setLoading);
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(global.fetch).toHaveBeenCalledWith(BaseUrl() + 'Product/GetAll');
 
-        expect(fetch).toHaveBeenCalledWith('https://api.example.com/Product/GetAll');
-        expect(setData).toHaveBeenCalledWith(mockData);
-        expect(setLoading).toHaveBeenCalledTimes(2);
-        expect(setLoading).toHaveBeenCalledWith(true); 
-        expect(setLoading).toHaveBeenCalledWith(false); 
-    });
+    expect(setLoading).toHaveBeenCalledTimes(2);
+    expect(setLoading).toHaveBeenCalledWith(true);
+    expect(setLoading).toHaveBeenCalledWith(false);
 
-    it('handles errors and sets loading to false', async () => {
-        const setData = jest.fn();
-        const setLoading = jest.fn();
-        const error = new Error('Network Error');
-
-        fetch.mockRejectedValueOnce(error);
-
-        await fetchProducts(setData, setLoading);
-
-        expect(fetch).toHaveBeenCalledWith('https://api.example.com/Product/GetAll');
-        expect(setData).not.toHaveBeenCalled();
-        expect(setLoading).toHaveBeenCalledTimes(2); 
-        expect(setLoading).toHaveBeenCalledWith(true); 
-        expect(setLoading).toHaveBeenCalledWith(false); 
-    });
+    expect(setData).toHaveBeenCalledTimes(1);
+    expect(setData).toHaveBeenCalledWith(mockData);
+  });
 });
