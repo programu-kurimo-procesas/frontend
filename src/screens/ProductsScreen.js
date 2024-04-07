@@ -8,6 +8,24 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { theme } from '../core/theme';
 import { addItemToList } from '../helpers/addToList';
 import BaseUrl from '../const/base_url';
+export const fetchProducts = async (setData, setLoading) => {
+    setLoading(true); // Set loading to true before the fetch
+
+    try {
+        const response = await fetch(BaseUrl() + 'Product/GetAll');
+        if (!response.ok) {
+            throw new Error('Network response was not ok (${response.status})');
+        }
+        const json = await response.json();
+        setData(json);
+    } catch (error) {
+        console.error(error);
+        // Consider rethrowing the error or exposing it somehow for better error handling
+    } finally {
+        setLoading(false);
+    }
+}
+
 const ProductsScreen = ({ userData }) => {
     navigation = useNavigation();
     const [isLoading, setLoading] = useState(true);
@@ -17,17 +35,10 @@ const ProductsScreen = ({ userData }) => {
     const [selectedItemImage, setSelectedItemImage] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
     const [stores, setStores] = useState([]);
-    const fetchProducts = () => {
-        fetch(BaseUrl() + 'Product/GetAll')
-            .then((response) => response.json())
-            .then((json) => setData(json))
-            .catch((error) => console.error(error))
-            .finally(() => setLoading(false));
-    }
-    useEffect(() => {
-        fetchProducts();
-    }, []);
 
+    useEffect(() => {
+        fetchProducts(setData, setLoading);
+    }, []);
     useEffect(() => {
         if (!selectedItem) {
             setStores([]);

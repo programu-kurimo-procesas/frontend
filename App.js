@@ -15,7 +15,6 @@ import {
 import MyTabs from './src/components/NavBar'
 
 const Stack = createStackNavigator()
-LogBox.ignoreAllLogs();
 
 export default function App() {
   const [userData, setUserData] = useState(null); // Initialize userData state

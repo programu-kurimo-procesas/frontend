@@ -22,7 +22,7 @@ const cartIconOutline = 'cart-outline'
 const productsIcon = 'bag'
 const productsIconOutline = 'bag-outline'
 
-export default function MyTabs({ userData}) {
+export default function MyTabs({ userData }) {
     console.log('My Tabs:\n' + userData.id);
     return (
         <Tab.Navigator
