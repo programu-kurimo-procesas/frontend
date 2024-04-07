@@ -162,7 +162,8 @@ const ProductsScreen = ({ userData }) => {
                                                     params: {
                                                         products: [selectedItem],
                                                         storeId: store.id,
-                                                        randomParam: Math.floor(Math.random() * 1000) + 1
+                                                        randomParam: Math.floor(Math.random() * 1000) + 1,
+                                                        fromProducts: true,
                                                     }
                                                 })
                                                 closeModal();
